@@ -2,6 +2,8 @@
 
 An attempt to imitate vim marks in tmux.
 
+<img alt="demo" src="https://github.com/jmsdrh/tmux-pane-marks/assets/27100342/10d0b607-cf61-4148-b5f9-91deac7ebe14" />
+
 
 # Usage
 
