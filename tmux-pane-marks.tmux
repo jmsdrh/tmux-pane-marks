@@ -38,7 +38,7 @@ jump_to_mark() {
   local key=$1
   local jumps_mod=$(get_tmux_option @tmux_pane_marks_jumps_mod "M")
   local marked_pane="@tmux_pane_marks_key_$key"
-  local pane_present=$(tmux lsp -aF"##{pane_id}" -f"##{m:*#{$marked_pane}*,##{pane_id}}" 2>/dev/null)
+  local pane_present="\$(tmux lsp -aF'##{pane_id}' -f'##{m:*#{$marked_pane}*,##{pane_id}}' 2>/dev/null)"
 
   tmux bind -n "$jumps_mod-$key" run "if test -n \"$pane_present\"; then tmux switch-client -t '#{$marked_pane}' >/dev/null 2>&1; fi"
 
