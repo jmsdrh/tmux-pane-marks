@@ -155,3 +155,16 @@ Make <kbd>ALT</kbd>+<kbd>n</kbd> prefix for jumps.  `ALT-n + p` jumps to pane ma
 ```bash
 set -g @tmux_pane_marks_jumps_prefix 'M-n'
 ```
+
+
+### Add `previous mark key` for jumping to last active mark
+
+Set the option `@tmux_pane_marks_alternate_mark_key`. No default set.
+
+**Example:**
+
+Make <kbd>;</kbd> a mark for previously active marked pane.
+
+```bash
+set -g @tmux_pane_marks_alternate_mark_key '\;'
+```
