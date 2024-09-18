@@ -116,13 +116,13 @@ Set the option `@tmux_pane_marks_prefix`. Default is <kbd>ALT</kbd>+<kbd>m</kbd>
 
 **Examples:**
 
-Make <kbd>CTRL</kbd>+<kbd>h</kbd> the prefix
+Make <kbd>CTRL</kbd>+<kbd>h</kbd> the prefix. `CTRL-h + p` marks the current pane with `p`
 
 ```bash
 set -g @tmux_pane_marks_prefix 'C-h'
 ```
 
-Make <kbd>ALT</kbd>+<kbd>s</kbd> the prefix
+Make <kbd>ALT</kbd>+<kbd>s</kbd> the prefix. `ALT-s + p` marks the current pane with `p`
 
 ```bash
 set -g @tmux_pane_marks_prefix 'M-s'
@@ -135,7 +135,7 @@ Set the option `@tmux_pane_marks_jumps_mod `. Default is <kbd>ALT</kbd>
 
 **Example:**
 
-Make <kbd>CTRL</kbd> the modifier
+Make <kbd>CTRL</kbd> the modifier. `CTRL + p` jumps to pane marked `p`
 
 ```bash
 set -g @tmux_pane_marks_jumps_mod 'C'
@@ -145,8 +145,12 @@ set -g @tmux_pane_marks_jumps_mod 'C'
 ### Add `prefix` for jumping to marks
 
 Set the option `@tmux_pane_marks_jumps_prefix`. No default set.
+If this option is set then it is used to jump to marks instead of `modifier key`
+It scopes all jumps to any prefix key combination chosen
 
 **Example:**
+
+Make <kbd>ALT</kbd>+<kbd>n</kbd> prefix for jumps.  `ALT-n + p` jumps to pane marked `p`
 
 ```bash
 set -g @tmux_pane_marks_jumps_prefix 'M-n'

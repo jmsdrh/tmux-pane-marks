@@ -31,7 +31,9 @@ JUMPS_TABLE="tmux_pane_marks_jumps_table"
 JUMPS_PREFIX=$(get_tmux_option @tmux_pane_marks_jumps_prefix "")
 
 create_jumps_table() {
-	tmux bind -T root "$JUMPS_PREFIX" switch-client -T "$JUMPS_TABLE" >/dev/null 2>&1
+	if test -n "$JUMPS_PREFIX"; then
+		tmux bind -T root "$JUMPS_PREFIX" switch-client -T "$JUMPS_TABLE" >/dev/null 2>&1
+	fi
 }
 
 jump_to_mark() {
@@ -40,10 +42,10 @@ jump_to_mark() {
 	local marked_pane="@tmux_pane_marks_key_$key"
 	local pane_present="\$(tmux lsp -aF'##{pane_id}' -f'##{m:*#{$marked_pane}*,##{pane_id}}' 2>/dev/null)"
 
-	tmux bind -n "$jumps_mod-$key" run "if test -n \"$pane_present\"; then tmux switch-client -t '#{$marked_pane}' >/dev/null 2>&1; fi"
-
 	if test -n "$JUMPS_PREFIX"; then
 		tmux bind -T "$JUMPS_TABLE" "$key" run "if test -n '$pane_present'; then tmux switch-client -t '#{$marked_pane}' >/dev/null 2>&1; fi"
+	else
+		tmux bind -n "$jumps_mod-$key" run "if test -n \"$pane_present\"; then tmux switch-client -t '#{$marked_pane}' >/dev/null 2>&1; fi"
 	fi
 }
 
@@ -75,9 +77,7 @@ main() {
 	if keys_option_is_set; then
 		create_keybindings
 		create_marks_table
-		if test -n "$JUMPS_PREFIX"; then
-			create_jumps_table
-		fi
+		create_jumps_table
 	fi
 }
 main
